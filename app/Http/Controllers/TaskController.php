@@ -12,13 +12,46 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $tasks = Task::where('user_id', Auth::user()->id)->get();
-        $otherTasks = Task::where('user_id', '!=', Auth::user()->id)->get();
-        $categories = Category::all();
-        return view('tasks.index', ['tasks' => $tasks, 'otherTasks' => $otherTasks, 'categories' => $categories]);
+    public function index(Request $request)
+{
+    $categories = Category::all();
+
+    // === MY TASKS FILTER ===
+    $myTasksQuery = Task::with('category')
+        ->where('user_id', Auth::user()->id);
+
+    if ($request->filled('search_my_tasks')) {
+        $myTasksQuery->where(function ($q) use ($request) {
+            $q->where('title', 'like', '%' . $request->search_my_tasks . '%')
+              ->orWhere('description', 'like', '%' . $request->search_my_tasks . '%');
+        });
     }
+
+    if ($request->filled('category_id_my')) {
+        $myTasksQuery->where('category_id', $request->category_id_my);
+    }
+
+    $tasks = $myTasksQuery->get();
+
+    // === AVAILABLE TASKS FILTER ===
+    $availableTasksQuery = Task::with('category')
+        ->where('user_id', '!=', Auth::user()->id);
+
+    if ($request->filled('search_available_tasks')) {
+        $availableTasksQuery->where(function ($q) use ($request) {
+            $q->where('title', 'like', '%' . $request->search_available_tasks . '%')
+              ->orWhere('description', 'like', '%' . $request->search_available_tasks . '%');
+        });
+    }
+
+    if ($request->filled('category_id_available')) {
+        $availableTasksQuery->where('category_id', $request->category_id_available);
+    }
+
+    $otherTasks = $availableTasksQuery->get();
+
+    return view('tasks.index', compact('tasks', 'otherTasks', 'categories'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -64,7 +97,9 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task = Task::find($id);
+        $categories = Category::all();
+        return view('tasks.edit', compact('task', 'categories'));
     }
 
     /**
@@ -72,7 +107,11 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $task = Task::find($id);
+        if($task->update($request->all()))
+            return redirect()->route('tasks.index')->with('success', 'Task updated successfully');
+        else
+            return redirect()->route('tasks.index')->with('error', 'Task update failed');
     }
 
     /**
@@ -80,6 +119,12 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $task = Task::find($id);
+        if($task->delete())
+            return redirect()->route('tasks.index')->with('success', 'Task deleted successfully');
+        else
+            return redirect()->route('tasks.index')->with('error', 'Task deletion failed');
     }
+
+    
 }

@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone_number');
-            $table->string('address');
-            $table->string('username');
-            $table->text('image')->default('https://picsum.photos/150');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };
