@@ -48,5 +48,13 @@ class User extends Authenticatable
     public function userType(){
         return $this->belongsTo(UserType::class);
     }
+
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
+
+    public function acceptedTasks(){
+        return $this->hasMany(Task::class, 'accepted_by_id');
+    }
     
 }

@@ -146,7 +146,11 @@
                     <td>{{ $task->estimated_time }} hrs</td>
                     <td><a href="{{ route('user.show', $task->user_id) }}" class="rounded-circle">{{ __('User') }}</a></td>
                     <td>
-                        <button class="btn btn-sm d-inline-block m-1 bg-indigo-400">Accept</button>
+                        <form method="POST" action="{{ route('tasks.accept', $task->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <button class="btn btn-sm d-inline-block m-1 bg-indigo-400">Accept</button>
+                        </form>
                         <button class="btn btn-sm d-inline-block m-1 bg-red-400 ">Reject</button>
                     </td>
                 </tr>

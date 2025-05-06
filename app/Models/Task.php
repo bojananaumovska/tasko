@@ -13,4 +13,14 @@ class Task extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function acceptedBy()
+    {
+        return $this->belongsTo(User::class, 'accepted_by_id');
+    }
 }

@@ -33,6 +33,46 @@
             <div class="bg-gray-200 dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("Активни обврски") }}
+                    <div class="flex gap-4">
+                            <div class="w-50 flex-1">
+                                <h3 class="w-100 p-3">My Active Tasks</h3>
+                                @foreach ($activeTasks as $task)
+                                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
+                                        <div class="p-6 text-gray-900 dark:text-gray-100 d-flex flex-row justify-between">
+                                            <div>
+                                                <h5>{{ $task->title }}</h5>
+                                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ $task->description }}</p>
+                                                <small>Expires: {{$task->due_date}}</small></br>
+                                                <small>Est. time : {{$task->estimated_time}} hrs</small></br>
+                                                <small>Category: {{$task->category->name}}</small>
+                                            </div>
+                                            <div>
+                                                <a class="btn btn-sm btn-success ms-3" href="{{ route('tasks.show', $task->id) }}">{{__('View')}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="w-50 flex-1">
+                                <h3 class="w-100 p-3">Tasks I've Accepted</h3>
+                                @foreach ($acceptedTasks as $task)
+                                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
+                                        <div class="p-6 text-gray-900 dark:text-gray-100 d-flex flex-row justify-between">
+                                            <div>
+                                                <h5>{{ $task->title }}</h5>
+                                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ $task->description }}</p>
+                                                <small>Expires: {{$task->due_date}}</small></br>
+                                                <small>Est. time : {{$task->estimated_time}} hrs</small></br>
+                                                <small>Category: {{$task->category->name}}</small>
+                                            </div>
+                                            <div>
+                                                <a class="btn btn-sm btn-success ms-3" href="{{ route('tasks.show', $task->id) }}">{{__('Mark as done')}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>

@@ -126,5 +126,16 @@ class TaskController extends Controller
             return redirect()->route('tasks.index')->with('error', 'Task deletion failed');
     }
 
-    
+    public function accept(string $id)
+    {
+        $task = Task::find($id);
+        $task->accepted_by_id = Auth::user()->id;
+        $task->status = 'in_progress';
+        if($task->save())
+            return redirect()->route('tasks.index')->with('success', 'Task accepted successfully');
+        else
+            return redirect()->route('tasks.index')->with('error', 'Task accept failed');
+    }
+
+
 }

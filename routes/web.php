@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsOwner;
+use App\Http\Middleware\IsNotOwner;
 use App\Models\User;
 
 Route::get('/', function () {
@@ -14,9 +15,7 @@ Route::get('/about-us', function () {
     return view('basic.about-us');
 })->name('about-us');
 
-Route::get('/dashboard', function () {
-    return view('basic.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,9 +29,12 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware([IsOwner::class])->group(function () {
         Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-    Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
-    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+        Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+        Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    
     });
+
+    Route::put('/tasks/{id}/accept', [TaskController::class, 'accept'])->name('tasks.accept')->middleware([IsNotOwner::class]);
 
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 });
