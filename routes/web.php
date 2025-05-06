@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+    Route::put('/tasks/{id}/markDone', [TaskController::class, 'markDone'])->name('tasks.markAsDone');//middleware
 
     Route::middleware([IsOwner::class])->group(function () {
         Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');

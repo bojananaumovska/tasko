@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone'
     ];
 
     /**
@@ -57,4 +58,7 @@ class User extends Authenticatable
         return $this->hasMany(Task::class, 'accepted_by_id');
     }
     
+    public function notifications(){
+        return $this->hasMany(Notification::class);
+    }
 }

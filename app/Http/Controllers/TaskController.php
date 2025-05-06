@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class TaskController extends Controller
 {
@@ -35,7 +37,8 @@ class TaskController extends Controller
 
     // === AVAILABLE TASKS FILTER ===
     $availableTasksQuery = Task::with('category')
-        ->where('user_id', '!=', Auth::user()->id);
+        ->where('user_id', '!=', Auth::user()->id)
+        ->where('status', 'pending');
 
     if ($request->filled('search_available_tasks')) {
         $availableTasksQuery->where(function ($q) use ($request) {
@@ -137,5 +140,24 @@ class TaskController extends Controller
             return redirect()->route('tasks.index')->with('error', 'Task accept failed');
     }
 
+    public function markDone(string $id)
+    {
+        $task = Task::find($id);
+        $task->status = 'completed';
+        $owner = User::find($task->user_id);
+        $owner->balance -= $task->budget;
+        $owner->save();
+
+        $tasker = User::find($task->accepted_by_id);
+        $tasker->balance += $task->budget;
+        $tasker->save();
+
+        $notification = new Notification();
+        $notification->sendNotification($task->user_id, "Your task $task->title has been marked as done");
+
+
+        if($task->save())
+            return redirect()->route('dashboard')->with('success', 'Your task has been marked as done.');
+    }
 
 }

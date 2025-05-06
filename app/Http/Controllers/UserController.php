@@ -12,12 +12,13 @@ class UserController extends Controller
     public function show(String $id)
     {
         $user = User::find($id);
-        return view('users.user');
+        return view('users.user', compact('user'));
     }
 
     public function dashboard()
     {
         $user = Auth::user();
+        
 
         // Твоите активни задачи (како креирани од корисникот, но не завршени)
         $activeTasks = Task::where('user_id', $user->id)
@@ -28,7 +29,10 @@ class UserController extends Controller
         $acceptedTasks = Task::where('accepted_by_id', $user->id)
                              ->where('status', 'in_progress')
                              ->get();
+                             
     
         return view('basic.dashboard', compact('activeTasks', 'acceptedTasks'));
     }
+
+
 }

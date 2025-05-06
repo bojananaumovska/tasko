@@ -1,4 +1,9 @@
 <x-app-layout>
+    @if(session('success'))
+        <div class="alert alert-success m-3">
+            {{ session('success') }}
+        </div>
+    @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __("You're on board tasker :name!", ['name' => Auth::user()->name]) }}
@@ -34,6 +39,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("Активни обврски") }}
                     <div class="flex gap-4">
+                    @if(Auth::check() && in_array(Auth::user()->userType->name, ['Client', 'Universal', 'Admin']))
                             <div class="w-50 flex-1">
                                 <h3 class="w-100 p-3">My Active Tasks</h3>
                                 @foreach ($activeTasks as $task)
@@ -53,6 +59,8 @@
                                     </div>
                                 @endforeach
                             </div>
+                            @endif
+                            @if(Auth::check() && in_array(Auth::user()->userType->name, ['Provider', 'Universal', 'Admin']))
                             <div class="w-50 flex-1">
                                 <h3 class="w-100 p-3">Tasks I've Accepted</h3>
                                 @foreach ($acceptedTasks as $task)
@@ -66,12 +74,17 @@
                                                 <small>Category: {{$task->category->name}}</small>
                                             </div>
                                             <div>
-                                                <a class="btn btn-sm btn-success ms-3" href="{{ route('tasks.show', $task->id) }}">{{__('Mark as done')}}</a>
+                                                <form method="POST" action="{{ route('tasks.markAsDone', $task->id) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-sm btn-success ms-3">{{__('Mark as done')}}</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
+                            @endif
                         </div>
                 </div>
             </div>

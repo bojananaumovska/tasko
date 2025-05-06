@@ -46,6 +46,23 @@
                         {{ __('Мој профил') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Notifications ({{ count($notifications??[]) }})
+                    </button>
+                <ul class="dropdown-menu">
+                    @foreach ($notifications as $notification)
+                  <li><a class="dropdown-item" href="#">
+                    <div class="p-2 text-gray-900 dark:text-gray-100 d-flex justify-between gap-2">
+                        {{ $notification->message }}
+                        <small>{{ $notification->created_at_human }}</small>
+                    </div>
+                        </a></li>
+                    @endforeach
+                </ul>
+                </div>
+                </div>
                 @endauth 
             </div>
             @auth
