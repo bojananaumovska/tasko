@@ -21,7 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone'
+        'phone',
+        'address',
+        'username',
+        'user_type_id',
     ];
 
     /**
@@ -60,5 +63,22 @@ class User extends Authenticatable
     
     public function notifications(){
         return $this->hasMany(Notification::class);
+    }
+
+    public function ratingsReceived() {
+        return $this->hasMany(Rating::class, 'rated_user_id');
+    }
+    
+    public function ratingsGiven() {
+        return $this->hasMany(Rating::class, 'rater_user_id');
+    }
+    public function sentMessages()
+    {
+    return $this->hasMany(Message::class, 'task_owner_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'task_worker_id');
     }
 }

@@ -23,4 +23,8 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'accepted_by_id');
     }
+    public function messages()
+{
+    return $this->hasMany(Message::class);
+}
 }

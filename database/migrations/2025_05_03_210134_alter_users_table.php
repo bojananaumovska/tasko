@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone_number')->nullable();
             $table->string('address')->nullable();
-            $table->string('username');
+            $table->string('username')->unique();
             $table->integer('balance')->default(0);
             $table->text('image')->default('https://picsum.photos/150');
         });

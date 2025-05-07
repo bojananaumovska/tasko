@@ -20,7 +20,8 @@ class TaskController extends Controller
 
     // === MY TASKS FILTER ===
     $myTasksQuery = Task::with('category')
-        ->where('user_id', Auth::user()->id);
+        ->where('user_id', Auth::user()->id)
+        ->where('completed', false);
 
     if ($request->filled('search_my_tasks')) {
         $myTasksQuery->where(function ($q) use ($request) {

@@ -6,7 +6,7 @@
             <h3 class="mb-4">My tasks</h3>
             <form method="GET" action="{{ route('tasks.index') }}" class="mb-4 d-flex gap-2">
                 <input name="search_my_tasks" placeholder="Search my tasks..." style="height: 40px;" class="form-control" value="{{ request('search_my_tasks') }}">
-                <select name="category_id_my" class="form-select" style="height: 40px;">
+                <select name="category_id_my" class="form-control" style="height: 40px;">
                     <option value="">{{__('Select category')}}</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category_id_my') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -49,7 +49,7 @@
             <h3 class="mb-4">Available tasks</h3>
             <form method="GET" action="{{ route('tasks.index') }}" class="mb-4 d-flex gap-2">
                 <input name="search_available_tasks" placeholder="Search available tasks..." style="height: 40px;" class="form-control" value="{{ request('search_available_tasks') }}">
-                <select name="category_id_available" class="form-select" style="height: 40px;">
+                <select name="category_id_available" class="form-control" style="height: 40px;">
                     <option value="">{{__('Select category')}}</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category_id_available') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>

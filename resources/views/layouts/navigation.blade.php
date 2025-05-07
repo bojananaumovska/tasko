@@ -52,11 +52,19 @@
                         Notifications ({{ count($notifications??[]) }})
                     </button>
                 <ul class="dropdown-menu">
+                    @if(count($notifications??[]) == 0)
+                    <li><a class="dropdown-item" href="#">No notifications for now</a></li>
+                    @endif
                     @foreach ($notifications as $notification)
                   <li><a class="dropdown-item" href="#">
-                    <div class="p-2 text-gray-900 dark:text-gray-100 d-flex justify-between gap-2">
-                        {{ $notification->message }}
+                    <div class="p-2 text-gray-900 dark:text-gray-100 d-flex justify-content-between gap-3 align-items-center" >
+                        <p>{{ $notification->message }}</p>
                         <small>{{ $notification->created_at_human }}</small>
+                        <form action="{{ route('notifications.delete', $notification->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-secondary" type="submit">X</button>
+                        </form>
                     </div>
                         </a></li>
                     @endforeach

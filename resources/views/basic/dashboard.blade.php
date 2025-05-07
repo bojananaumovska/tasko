@@ -10,6 +10,33 @@
         </h2>
     </x-slot>
 
+<!--Chat Modal-->
+<!--Chat-->
+<div class="modal" tabindex="-1" id="chatModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="chat">
+          
+        </div>
+        <div class="input-group mb-3">
+            <form class="d-flex w-100 gap-2" method="POST" action="{{route('message.store')}}">
+                @csrf
+                <input type="hidden" name="task_owner_id" id="task_owner_id" value="{{ auth()->id() }}"> 
+                <input type="hidden" name="task_worker_id" id="task_worker_id" value="">
+                <input type="hidden" name="task_id" id="task_id" value="">
+                <input class="form-control flex-1" placeholder="Your message" id="message" name="message">
+                <button class="btn btn-outline-secondary" type="submit">Send</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     <div class="py-12 flex-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg d-flex">
@@ -48,12 +75,13 @@
                                             <div>
                                                 <h5>{{ $task->title }}</h5>
                                                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ $task->description }}</p>
+                                                <small>User: {{$task->acceptedBy->name}}</small></br>
                                                 <small>Expires: {{$task->due_date}}</small></br>
                                                 <small>Est. time : {{$task->estimated_time}} hrs</small></br>
                                                 <small>Category: {{$task->category->name}}</small>
                                             </div>
                                             <div>
-                                                <a class="btn btn-sm btn-success ms-3" href="{{ route('tasks.show', $task->id) }}">{{__('View')}}</a>
+                                                <a class="btn btn-sm btn-warning ms-3 chat" data-task_id = "{{ $task->id }}" data-task_worker_id = "{{ $task->accepted_by_id }}"  data-current_user_id = "{{ Auth::user()->id }}">{{__('View updates')}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -69,15 +97,17 @@
                                             <div>
                                                 <h5>{{ $task->title }}</h5>
                                                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ $task->description }}</p>
+                                                <small>User: {{$task->user->name}}</small></br>
                                                 <small>Expires: {{$task->due_date}}</small></br>
                                                 <small>Est. time : {{$task->estimated_time}} hrs</small></br>
                                                 <small>Category: {{$task->category->name}}</small>
                                             </div>
                                             <div>
+                                               <button type="submit" class="btn btn-sm btn-info m-2 chat"  data-task_id = "{{ $task->id }}" data-task_worker_id = "{{ $task->accepted_by_id }}" data-current_user_id = "{{ Auth::user()->id }}">{{__('Post an update')}}</button>
                                                 <form method="POST" action="{{ route('tasks.markAsDone', $task->id) }}">
                                                     @csrf
                                                     @method('PUT')
-                                                    <button type="submit" class="btn btn-sm btn-success ms-3">{{__('Mark as done')}}</button>
+                                                    <button class="btn btn-sm btn-success m-2">{{__('Mark as done')}}</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -114,4 +144,5 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>

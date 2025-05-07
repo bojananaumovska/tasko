@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
+use App\Models\Message;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
         return view('users.user', compact('user'));
     }
 
-    public function dashboard()
+    public function dashboard(string $task_id='0')
     {
         $user = Auth::user();
         
@@ -30,7 +31,7 @@ class UserController extends Controller
                              ->where('status', 'in_progress')
                              ->get();
                              
-    
+        
         return view('basic.dashboard', compact('activeTasks', 'acceptedTasks'));
     }
 
