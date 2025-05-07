@@ -191,7 +191,7 @@
 
     @if(Auth::user()->userType->name == 'Admin' or Auth::user()->userType->name == 'Provider' or Auth::user()->userType->name == 'Universal')
     <div class="w-50 flex-1">
-        <h3 class="mb-4">Available tasks</h3>
+        <h3 class="mb-4 ">Available tasks</h3>
         <form method="GET" action="{{ route('tasks.index') }}" class="mb-3 d-flex gap-2">
             <input name="search_available_tasks" placeholder="Search available tasks..." style="height: 40px;" class="form-control" value="{{ request('search_available_tasks') }}">
             <select name="category_id_available" class="form-control" style="height: 40px;">

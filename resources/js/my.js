@@ -7,6 +7,16 @@ document.querySelectorAll(".desc").forEach((el) => {
     })
 })
 
+const ratingModal = document.getElementById("ratingModal")
+
+document.querySelectorAll(".rate").forEach((el) => {
+    el.addEventListener("click", () => {
+        ratingModal.querySelector("#task_id").value = el.dataset.task_id;
+        ratingModal.querySelector("#rated_user_id").value = el.dataset.rated_user_id;
+        new bootstrap.Modal(ratingModal).show()
+    })
+})
+
 document.querySelectorAll('.chat').forEach(btn => {
     btn.addEventListener('click', function () {
         const taskId = this.dataset.task_id;
