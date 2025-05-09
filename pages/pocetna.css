@@ -61,7 +61,7 @@
 }
 
 #body .background{
-    background: url("./src/hannah.png") no-repeat;
+    background: url("./src/pocetna_bkr.png") no-repeat;
     background-size: cover;
     height: 50vw;
     width: 100%;
@@ -70,88 +70,78 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 #body .title{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 30px 0 0 0;
     font-size: 1.5vw;
+    margin-top: auto;
+    padding-top: 5vw;
+    width: 70vw;
 }
 
 #body .title h1{
     color: #FFFFFF;
 }
 
-#body .blob{
-    background: url("./src/yellow_blob.png") no-repeat;
-    width: 35vw;
-    height: 20vw;
-    background-size: 100% 100%;
+#body .title p{
+    text-align: center;
+    color: white;
+}
+
+#body .background button{
     display: flex;
     align-items: center;
+    justify-content: start;
+    border: none;
+    border-radius: 3vw;
+    padding: 1.1vw;
+    height: 4.5vw;
+    width: 15vw;
+    margin: 2vw 0 auto 0;
+}
+#body .background button p{
+    font-size: 1.5vw;
+    margin: 0 0.6vw 0 0;
+}
+
+#body .background button .circle{
+    margin: 0 auto 0 auto;
+    height: 3vw;
+    width: 3vw;
+    border-radius: 100%;
+    background: linear-gradient(to right, #fadeee, #F1808D);
+    display: flex;
     justify-content: center;
-    align-self: start;
-    margin: auto 0 auto 10%;
-}
-
-#body .blob p{
-    width: 80%;
-    color: #FFFFFF;
-    font-size: 1.1vw;
-}
-
-#body .miv{
-    height: 43vw;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-#body .miv .misija{
-    background: url("./src/red_blob.png") no-repeat;
-    width: 40vw;
-    height: 25vw;
-    background-size: 100% 100%;
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
-#body .miv .misija h1{
-    margin: auto 0 0 0;
-    font-size: 2vw;
+#body .background button .circle .arrow{
+    background: url("./src/arrow.png") no-repeat;
+    background-size: cover;
+    width: 1vw;
+    height: 1vw;
 }
 
-#body .miv .misija p{
-    margin: 0 0 auto 0;
-    font-size: 1vw;
-    padding: 0 4vw 0 4vw;
-}
-
-#body .miv .vizija{
-    background: url("./src/pink_blob.png") no-repeat;
-    width: 40vw;
-    height: 30vw;
-    background-size: 100% 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#body .background .msg{
     align-self: end;
-    margin: 0 0 30px 0;
-}
-
-#body .miv .vizija h1{
-    margin: 4vw 0 0 0;
-    font-size: 2vw;
-}
-
-#body .miv .vizija p{
-    margin: 0 0 auto 0;
+    margin: 0 5vw 0 0;
+    width: 25vw;
+    height: 7vw;
+    padding: 1vw;
+    border-radius: 2vw;
     font-size: 1vw;
-    padding: 0 4vw 0 4vw;
+    backdrop-filter: blur(20px);
+    margin-bottom: auto;
 }
+
+#body .background .msg p{
+    color: white;
+}
+
 
 #footer{
     background-color: #333333;
