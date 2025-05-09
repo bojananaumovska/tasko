@@ -46,7 +46,8 @@
 #header .button{
     display: flex;
     align-items: center;
-    background: url("./src/btn_background.png") no-repeat;
+    /* background: url("./src/btn_background.png") no-repeat; */
+    background: linear-gradient(to right, #fadeee, #fc72c0);
     border: none;
     border-radius: 50px;
     padding: 5px 15px 5px 15px;
