@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body{
+    font-family: "Open Sans";
+}
+
 #main{
     width: 90%;
     margin: auto;
@@ -79,6 +83,7 @@
 
 #body .background .title h1{
     color: #FFFFFF;
+    text-shadow: 2px 2px 6px black;
 }
 
 #body .background .title p{
@@ -94,7 +99,7 @@
     border-radius: 3vw;
     padding: 1.1vw;
     height: 4.5vw;
-    width: 15vw;
+    width: 17vw;
     margin: 2vw 0 auto 0;
 }
 

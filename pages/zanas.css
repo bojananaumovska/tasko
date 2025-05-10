@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body{
+    font-family: 'Open Sans';
+}
+
 #main{
     width: 90%;
     margin: auto;
