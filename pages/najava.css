@@ -1,0 +1,156 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    min-height: 100vh;
+    font-family: 'Open Sans';
+    background: #F0F0F0;
+    background: linear-gradient(180deg, rgba(240, 240, 240, 1) 0%, rgba(189, 189, 189, 1) 51%, rgba(215, 159, 165, 1) 75%, rgba(228, 143, 153, 1) 90%, rgba(235, 136, 147, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+    height: 25vh;
+}
+
+.title .logo{
+    margin: 0 20px 0 0;
+}
+
+.title .name{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.island{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    width: 60vh;
+    height: 50vh;
+    border-radius: 6vh;
+}
+
+.island .island-title{
+    text-align: center;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.island .island-title h1{
+    font-size: 4vh;
+    text-shadow: 0 0.4vh 0.4vh gray;
+    margin: 0 0 3vh 0;
+}
+
+.island .island-title p{
+    font-size: 3vh;
+}
+
+.island .form{
+    height: 25vh;
+    width: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.island .form .email{
+    display: flex;
+    height: 8vh;
+    width: 100%;
+}
+
+.island .form .email .img{
+    background: #D9D9D9;
+    width: 10vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10vh 0 0 10vh;
+}
+
+.island .form .email input{
+    background: #D9D9D9;
+    border: none;
+    width: 40vh;
+    border-radius: 0 10vh 10vh 0;
+    outline: none;
+    font-size: 2vh;
+}
+
+.island .form .email .img img{
+    width: 5vh;
+    height: 4vh;
+}
+
+.island .form .password{
+    display: flex;
+    height: 8vh;
+    width: 100%;
+}
+
+.island .form .password .img{
+    background: #D9D9D9;
+    width: 10vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10vh 0 0 10vh;
+}
+
+.island .form .password input{
+    background: #D9D9D9;
+    border: none;
+    width: 40vh;
+    border-radius: 0 10vh 10vh 0;
+    outline: none;
+    font-size: 2vh;
+}
+
+.island .form .password .img img{
+    width: 5vh;
+    height: 3vh;
+}
+
+.island .form button{
+    width: 15vh;
+    height: 5vh;
+    align-self: center;
+    background: #000000;
+    color: white;
+    border: none;
+    border-radius: 3vh;
+    font-size: 2vh;
+}
+
+.footer{
+    margin: auto 0 5vh 0;
+}
+
+.footer ul{
+    display: flex;
+    list-style: none;
+}
+
+.footer ul li{
+    margin: 0 20px 0 20px;
+}
+
+.footer ul li a{
+    color: white;
+    font-size: 24px;
+}
