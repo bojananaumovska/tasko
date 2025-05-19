@@ -1,0 +1,148 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            font-family: 'Open Sans';
+            background: linear-gradient(180deg, #F0F0F0 0%, #BDBDBD 51%, #D79FA5 75%, #E48F99 90%, #EB8893 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 15vh;
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+        }
+        .title .logo {
+            margin-right: 20px;
+        }
+        .title .name {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 36px;
+        }
+        .login-prompt {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            font-size: 1.8vh;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3vh;
+        }
+        .login-prompt p {
+            margin: 0;
+        }
+        .login-link {
+            color: black;
+            text-decoration: underline;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 2vh;
+            align-self: center;
+        }
+        .login-link:hover {
+            color: #E48F99;
+        }
+        .island {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            width: 42%;              
+            padding: 4vh 3vh;
+            border-radius: 6vh;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .image-side {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .island-title h1 {
+            font-size: 4vh;
+            text-shadow: 0 0.4vh 0.4vh gray;
+            margin-bottom: 1vh;
+            text-align: center;
+        }
+        .island-title p {
+            font-size: 1.8vh;
+            text-align: center;
+        }
+        .form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            margin-top: 3vh;
+        }
+        .form .email,
+        .form .password {
+            height: 8vh;
+            width: 100%;
+        }
+        .content-wrapper {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4vh;
+            gap: 3vh;               
+        }
+        .form input {
+            background: #D9D9D9;
+            border: none;
+            width: 100%;
+            border-radius: 10vh;
+            outline: none;
+            font-size: 2vh;
+            padding: 1.5vh 2vh;
+        }
+        .form button {
+            width: 20vh;
+            height: 5vh;
+            align-self: center;
+            background: #000000;
+            color: white;
+            border: none;
+            border-radius: 3vh;
+            font-size: 2vh;
+            cursor: pointer;
+        }
+        #error-msg {
+            color: red;
+            text-align: center;
+            font-size: 2vh;
+        }
+        .image-side img {
+            width: 85%;
+            max-width: 350px;
+            border-radius: 3vh;
+        }
+        .footer {
+            margin: auto 0 5vh 0;
+        }
+        .footer ul {
+            display: flex;
+            list-style: none;
+        }
+        .footer ul li {
+            margin: 0 20px;
+        }
+        .footer ul li a {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
