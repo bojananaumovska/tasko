@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taskify Регистрација</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+<body>
+
+<div class="title">
+    <div class="title">
+        <a class="logo" href=""><img src="logo.png" alt="" width="68" height="62"></a>
+        <a class="name" href="">ТАСКО</a>
+    </div>
+
+    <div class="login-prompt">
+        <p>Веќе имаш кориснички профил?</p>
+        <a href="najava.html" class="login-link">НАЈАВИ СЕ</a>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="island">
+        <div class="island-title">
+            <h1>Регистрирај се на Taskify</h1>
+            <p>Ни требаат твои основни податоци за да го креираме твојот профил</p>
+        </div>
+        <form class="form" onsubmit="return checkPasswords();">
+            <div class="email">
+                <input type="text" placeholder="Внеси име и презиме" required>
+            </div>
+            <div class="email">
+                <input type="email" placeholder="Внеси E-маил" required>
+            </div>
+            <div class="password">
+                <input type="password" id="password" placeholder="Внеси лозинка" required>
+            </div>
+            <div class="password">
+                <input type="password" id="confirm-password" placeholder="Потврди лозинка" required>
+            </div>
+            <p id="error-msg"></p>
+            <button type="submit">РЕГИСТРАЦИЈА</button>
+        </form>
+    </div>
+
+    <div class="image-side">
+        <img src="registration.png" alt="Taskify Registration Image">
+    </div>
+</div>
+
+<div class="footer">
+    <ul>
+        <li><a href="#">Почетна</a></li>
+        <li><a href="#">За нас</a></li>
+        <li><a href="#">Контакт</a></li>
+        <li><a href="#">Регистрирај се</a></li>
+    </ul>
+</div>
+
+<script>
+    function checkPasswords() {
+        const pass = document.getElementById("password").value;
+        const confirmPass = document.getElementById("confirm-password").value;
+        const errorMsg = document.getElementById("error-msg");
+        if (pass !== confirmPass) {
+            errorMsg.textContent = "Лозинките не се совпаѓаат";
+            return false;
+        }
+        errorMsg.textContent = "";
+        return true;
+    }
+</script>
+
+</body>
+</html>
