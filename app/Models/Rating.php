@@ -14,4 +14,8 @@ class Rating extends Model
     public function raterUser(){
         return $this->belongsTo(User::class, 'rater_user_id');
     }
+    public function task(){
+        return $this->belongsTo(Task::class);
+
+    }
 }

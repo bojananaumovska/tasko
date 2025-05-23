@@ -9,6 +9,33 @@
             {{ session('error') }}
         </div>
     @endif
+
+<!--Chat-->
+<div class="modal" tabindex="-1" id="chatModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="chat">
+          
+        </div>
+        <div class="input-group mb-3">
+            <form class="d-flex w-100 gap-2" method="POST" action="{{route('message.store')}}">
+                @csrf
+                <input type="hidden" name="sender_id" id="sender_id" value="{{Auth::id()}}"> 
+                <input type="hidden" name="reciever_id" id="reciever_id" value="">
+                <input type="hidden" name="task_id" id="task_id" value="">
+                <input class="form-control flex-1" placeholder="Your message" id="message" name="message">
+                <button class="btn btn-outline-secondary" type="submit">Send</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     <!--- Modal for description -->
 <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -73,36 +100,8 @@
   </div>
 </div>
 
-<!--Chat-->
-
-<div class="modal" tabindex="-1" id="chatModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div id="chat">
-          
-        </div>
-        <div class="input-group mb-3">
-            <form class="d-flex w-100 gap-2" method="POST" action="{{route('message.store')}}">
-                @csrf
-                <input type="hidden" name="task_owner_id" id="task_owner_id" value="{{ auth()->id() }}"> 
-                <input type="hidden" name="task_worker_id" id="task_worker_id" value="">
-                <input type="hidden" name="task_id" id="task_id" value="">
-                <input class="form-control flex-1" placeholder="Your message" id="message" name="message">
-                <button class="btn btn-outline-secondary" type="submit">Send</button>
-            </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="p-5 d-flex mx-auto w-100 gap-4">
-    @if(Auth::check() && in_array(Auth::user()->userType->name, ['Client', 'Universal', 'Admin']))
+    @if(Auth::check() && (Auth::user()->hasRole('client') || Auth::user()->hasRole('admin')))
     <div class="w-50 flex-1">
         <h3 class="mb-4">My tasks</h3>
         <form method="GET" action="{{ route('tasks.index') }}" class="mb-3 d-flex gap-2">
@@ -172,7 +171,7 @@
                         <a class="btn btn-sm btn-info d-inline-block m-1 rate"
                          data-rated_user_id = "{{ $task->accepted_by_id }}" data-task_id = "{{ $task->id }}" >Rate the service</a>
                         @else
-                        <a class="btn btn-sm btn-success d-inline-block m-1 chat" data-task_id = "{{ $task->id }}" >View updates</a>
+                          <a class="btn btn-sm btn-warning ms-3 chat" data-task_id = "{{ $task->id }}" data-task_owner_id = "{{ $task->user_id }}" data-task_worker_id = "{{ $task->accepted_by_id }}"  data-current_user_id = "{{ Auth::user()->id }}">{{__('View updates')}}</a>
                         @endif
 
                         
@@ -189,7 +188,7 @@
     </div>
     @endif
 
-    @if(Auth::user()->userType->name == 'Admin' or Auth::user()->userType->name == 'Provider' or Auth::user()->userType->name == 'Universal')
+    @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('provider'))
     <div class="w-50 flex-1">
         <h3 class="mb-4 ">Available tasks</h3>
         <form method="GET" action="{{ route('tasks.index') }}" class="mb-3 d-flex gap-2">

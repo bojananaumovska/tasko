@@ -26,17 +26,6 @@ class TaskSeeder extends Seeder
             'category_id' => 3,
         ],
         [
-            'title' => 'Assemble IKEA furniture',
-            'description' => 'Need someone to assemble a wardrobe.',
-            'budget' => 2000,
-            'due_date' => '2025-05-08',
-            'due_time' => '10:00',
-            'location' => 'Bitola, City Center',
-            'estimated_time' => '3',
-            'user_id' => 2,
-            'category_id' => 4,
-        ],
-        [
             'title' => 'Mow the lawn',
             'description' => 'Front and back yard need mowing.',
             'budget' => 1000,
@@ -55,7 +44,7 @@ class TaskSeeder extends Seeder
             'due_time' => '11:00',
             'location' => 'Tetovo, Džepčishte',
             'estimated_time' => '5',
-            'user_id' => 3,
+            'user_id' => 2,
             'category_id' => 6,
         ],
         [
@@ -70,17 +59,6 @@ class TaskSeeder extends Seeder
             'category_id' => 2,
         ],
         [
-            'title' => 'Babysit for the evening',
-            'description' => '3-year-old girl, 5 PM to 9 PM.',
-            'budget' => 2500,
-            'due_date' => '2025-05-09',
-            'due_time' => '17:00',
-            'location' => 'Prilep, Center',
-            'estimated_time' => '4',
-            'user_id' => 4,
-            'category_id' => 7,
-        ],
-        [
             'title' => 'Repair bicycle brakes',
             'description' => 'Front brakes are loose and need adjustment.',
             'budget' => 800,
@@ -88,7 +66,7 @@ class TaskSeeder extends Seeder
             'due_time' => '13:00',
             'location' => 'Veles, Downtown',
             'estimated_time' => '1.5',
-            'user_id' => 1,
+            'user_id' => 2,
             'category_id' => 3,
         ],
         [
@@ -99,7 +77,7 @@ class TaskSeeder extends Seeder
             'due_time' => '18:00',
             'location' => 'Remote',
             'estimated_time' => '2',
-            'user_id' => 3,
+            'user_id' => 2,
             'category_id' => 1,
         ],
         [
@@ -113,17 +91,7 @@ class TaskSeeder extends Seeder
             'user_id' => 2,
             'category_id' => 8,
         ],
-        [
-            'title' => 'Clean apartment',
-            'description' => 'Full cleaning of a 2-bedroom apartment.',
-            'budget' => 2800,
-            'due_date' => '2025-05-10',
-            'due_time' => '12:00',
-            'location' => 'Kumanovo, Center',
-            'estimated_time' => '3',
-            'user_id' => 4,
-            'category_id' => 9,
-        ],
+        
     ];
 
     foreach ($tasks as $taskData) {

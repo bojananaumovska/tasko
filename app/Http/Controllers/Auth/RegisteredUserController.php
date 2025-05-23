@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
-            'user_type_id' => $request->user_type_id
+            'role_id' => $request->role_id
 
         ]);
 

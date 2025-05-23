@@ -24,7 +24,10 @@ class Task extends Model
         return $this->belongsTo(User::class, 'accepted_by_id');
     }
     public function messages()
-{
-    return $this->hasMany(Message::class);
-}
+    {
+        return $this->hasMany(Message::class);
+    }
+    public function ratings(){
+        return $this->hasMany(Rating::class);
+    }
 }

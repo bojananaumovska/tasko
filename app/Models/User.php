@@ -24,7 +24,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'username',
-        'user_type_id',
+        'role_id',
     ];
 
     /**
@@ -49,9 +49,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function userType(){
-        return $this->belongsTo(UserType::class);
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
+
+    public function hasRole($roleName)
+    {
+        return $this->role && $this->role->name == $roleName;
+    }
+    public function hasAnyRole(array $roleNames)
+{
+    return $this->role && in_array($this->role->name, $roleNames);
+}
 
     public function tasks(){
         return $this->hasMany(Task::class);
@@ -74,11 +84,11 @@ class User extends Authenticatable
     }
     public function sentMessages()
     {
-    return $this->hasMany(Message::class, 'task_owner_id');
+    return $this->hasMany(Message::class, 'sender_id');
     }
 
     public function receivedMessages()
     {
-        return $this->hasMany(Message::class, 'task_worker_id');
+        return $this->hasMany(Message::class, 'reciever_id');
     }
 }

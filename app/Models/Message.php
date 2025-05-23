@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'task_owner_id',
-        'task_worker_id',
+        'sender_id',
+        'reciever_id',
         'task_id',
         'message',
     ];
@@ -18,13 +18,13 @@ class Message extends Model
         return $this->belongsTo(Task::class);
     }
 
-    public function taskOwner()
+    public function sender()
     {
-        return $this->belongsTo(User::class, 'task_owner_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
-    public function taskWorker()
+    public function reciever()
     {
-        return $this->belongsTo(User::class, 'task_worker_id');
+        return $this->belongsTo(User::class, 'reciever_id');
     }
 }

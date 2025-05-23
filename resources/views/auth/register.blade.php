@@ -32,13 +32,12 @@
         </div>
         <div class="mt-4">
             <x-input-label for="user_type_id" :value="__('What are you signing up for?')" />
-            <select id="user_type_id" name="user_type_id" required class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <select id="user_type_id" name="role_id" required class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option value="">-- Please choose an option --</option>
-                <option value="2"  @selected(old('user_type_id') == 3)>I want to seek jobs</option>
-                <option value="3"  @selected(old('user_type_id') == 2)>I want to offer jobs</option>
-                <option value="4"  @selected(old('user_type_id') == 4)>I'd like to do both</option>
+                <option value="2"  @selected(old('role_id') == 2)>I want to seek jobs</option>
+                <option value="3"  @selected(old('role_id') == 3)>I want to offer jobs</option>
             </select>
-            <x-input-error :messages="$errors->get('user_type_id')" class="mt-2" />
+            <x-input-error :messages="$errors->get('role_id')" class="mt-2" />
         </div>
 
         <!-- Password -->

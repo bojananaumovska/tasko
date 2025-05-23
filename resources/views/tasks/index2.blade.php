@@ -1,6 +1,6 @@
 <x-app-layout>
 <div class="p-5 d-flex mx-auto">
-    @if(Auth::check() && in_array(Auth::user()->userType->name, ['Client', 'Universal', 'Admin']))
+    @if(Auth::check() && (auth()->user()->hasRole('client') || auth()->user()->hasRole('admin')))
     <div class="py-12" style="flex: 1;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex-1">
             <h3 class="mb-4">My tasks</h3>
@@ -43,7 +43,7 @@
     </div>
     @endif
 
-    @if(Auth::user()->userType->name == 'Admin' or Auth::user()->userType->name == 'Provider' or Auth::user()->userType->name == 'Universal')
+    @if(auth()->user()->hasRole('admin') or auth()->user()->hasRole('provider'))
     <div class="py-12" style="flex: 1;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex-gro">
             <h3 class="mb-4">Available tasks</h3>

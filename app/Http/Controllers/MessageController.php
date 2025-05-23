@@ -13,8 +13,8 @@ class MessageController extends Controller
     {
         Message::create([
             'message' => $request->message,
-            'task_owner_id' => $request->task_owner_id,
-            'task_worker_id' => $request->task_worker_id,
+            'sender_id' => $request->sender_id,
+            'reciever_id' => $request->reciever_id,
             'task_id' => $request->task_id
         ]);
         return redirect()->back();

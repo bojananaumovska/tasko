@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
              'email' => 'admin@example.com',
              'username' => 'admin',
              'password' => Hash::make('password'),
-             'user_type_id' => 1],
+             'role_id' => 1],
 
             ['name' => 'Client', 
              'phone_number' => '123456789',
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
              'email' => 'client@example.com',
              'username' => 'client',
              'password' => Hash::make('password'),
-             'user_type_id' => 2],
+             'role_id' => 2],
 
             ['name' => 'Provider',
              'phone_number' => '123456789',
@@ -37,15 +37,8 @@ class UserSeeder extends Seeder
              'email' => 'provider@example.com',
              'username' => 'provider',
              'password' => Hash::make('password'),
-             'user_type_id' => 3],
+             'role_id' => 3],
 
-            ['name' => 'Universal',
-             'phone_number' => '123456789',
-             'address' => 'Adresa',
-             'email' => 'universal@example.com',
-             'username' => 'universal',
-             'password' => Hash::make('password'),
-             'user_type_id' => 4],
         ]);
     }
 }
