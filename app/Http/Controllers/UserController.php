@@ -72,5 +72,16 @@ class UserController extends Controller
         return view('basic.dashboard', compact('activeTasks', 'acceptedTasks', 'completedTasksAsProvider', 'completedTasksAsClient', 'ratings','average_rating'));
     }
 
+    public function addCredits(){
+        return view('users.add-credits');
+    }
+
+    public function storeCredits(Request $request, string $id){
+        $user = User::find($id);
+        $user->balance += $request->credits;
+        $user->save();
+        return redirect()->route('dashboard')->with('success', 'Credits added successfully');
+    }
+
 
 }

@@ -7,9 +7,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\IsOwner;
 use App\Http\Middleware\IsNotOwner;
 use App\Models\Message;
+use App\Models\Payment;
 use App\Models\User;
 
 Route::get('/', function () {
@@ -50,6 +52,11 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/id/add-credits', [UserController::class, 'addCredits'])->name('user.add-credits');
+    Route::post('/user/{id}/add-credits', [UserController::class, 'storeCredits'])->name('user.store-credits');
+
+    Route::get('/payment/{task_id}', [PaymentController::class, 'index'])->name('payment.show');
+    Route::post('/payment/{task_id}', [PaymentController::class, 'store'])->name('payments.store');
 });
 
 require __DIR__.'/auth.php';

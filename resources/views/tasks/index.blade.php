@@ -168,8 +168,13 @@
                             <button type="submit" class="btn btn-sm bg-red-400 d-inline-block m-1">Delete</button>
                         </form>
                         @elseif($task->status == "completed")
-                        <a class="btn btn-sm btn-info d-inline-block m-1 rate"
-                         data-rated_user_id = "{{ $task->accepted_by_id }}" data-task_id = "{{ $task->id }}" >Rate the service</a>
+                          @if($task->payment != null)
+                          <a class="btn btn-sm btn-info d-inline-block m-1 rate"
+                           data-rated_user_id = "{{ $task->accepted_by_id }}" data-task_id = "{{ $task->id }}" >Rate the service</a>
+                           @elseif($task->payment == null)
+                           <a  class="btn btn-sm btn-success d-inline-block m-1"
+                           href={{route('payment.show', $task->id)}} >Make a payment</a>
+                           @endif
                         @else
                           <a class="btn btn-sm btn-warning ms-3 chat" data-task_id = "{{ $task->id }}" data-task_owner_id = "{{ $task->user_id }}" data-task_worker_id = "{{ $task->accepted_by_id }}"  data-current_user_id = "{{ Auth::user()->id }}">{{__('View updates')}}</a>
                         @endif

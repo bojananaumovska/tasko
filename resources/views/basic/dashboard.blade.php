@@ -86,7 +86,7 @@
     <div class="pt-12 flex-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg d-flex">
-                <img src="{{ auth()->user()->image }}" class="rounded-circle m-4">   
+                <img src="{{ auth()->user()->image }}" class="rounded-circle m-4 " style="width:150px; height:150px">   
                 <div>
                 <h4 class="p-6 text-gray-900 dark:text-gray-100 h2">
                     {{ auth()->user()->name }} 
@@ -108,6 +108,10 @@
                 <p class="ms-3">{{ auth()->user()->email }}</p>
                 <p class="ms-3">{{ auth()->user()->phone }}</p>
                 <p class="ms-3">{{ auth()->user()->address }}</p>
+                <div class="m-3">
+                    <p><b>My balance: </b>{{auth()->user()->balance}}</p>
+                    <a class="btn btn-sm btn-secondary" href="{{route('user.add-credits', auth()->user()->id)}}">Add credits</a>
+                </div>
                 </div>
                 
             </div>
