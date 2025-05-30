@@ -82,6 +82,12 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('dashboard')->with('success', 'Credits added successfully');
     }
+    public function withdrawCredits($id){
+        $user = User::find($id);
+        $user->balance = 0;
+        $user->save();
+        return redirect()->route('dashboard')->with('success', 'Credits withdrawn successfully');
+    }
 
 
 }

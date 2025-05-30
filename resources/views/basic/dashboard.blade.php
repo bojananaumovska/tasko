@@ -110,7 +110,14 @@
                 <p class="ms-3">{{ auth()->user()->address }}</p>
                 <div class="m-3">
                     <p><b>My balance: </b>{{auth()->user()->balance}}</p>
+                    @if(auth()->user()->hasRole('client'))
                     <a class="btn btn-sm btn-secondary" href="{{route('user.add-credits', auth()->user()->id)}}">Add credits</a>
+                    @else
+                    <form action="{{route('user.withdraw-credits', auth()->user()->id)}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-secondary" >Withdraw credits</button>
+                    </form>
+                    @endif
                 </div>
                 </div>
                 

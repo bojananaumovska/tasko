@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
     Route::get('/user/id/add-credits', [UserController::class, 'addCredits'])->name('user.add-credits');
     Route::post('/user/{id}/add-credits', [UserController::class, 'storeCredits'])->name('user.store-credits');
+    Route::post('/user/{id}/withdraw-credits', [UserController::class, 'withdrawCredits'])->name('user.withdraw-credits');
 
     Route::get('/payment/{task_id}', [PaymentController::class, 'index'])->name('payment.show');
     Route::post('/payment/{task_id}', [PaymentController::class, 'store'])->name('payments.store');

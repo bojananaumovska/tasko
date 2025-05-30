@@ -145,13 +145,6 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
         $task->status = 'completed';
-        $owner = User::find($task->user_id);
-        $owner->balance -= $task->budget;
-        $owner->save();
-
-        $tasker = User::find($task->accepted_by_id);
-        $tasker->balance += $task->budget;
-        $tasker->save();
 
         $notification = new Notification();
         $notification->sendNotification($task->user_id, "Your task $task->title has been marked as done");
