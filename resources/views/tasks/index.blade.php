@@ -101,7 +101,7 @@
 </div>
 
 <div class="p-5 d-flex mx-auto w-100 gap-4">
-    @if(Auth::check() && (Auth::user()->hasRole('client') || Auth::user()->hasRole('admin')))
+    @if(Auth::check() && (Auth::user()->hasRole('client')))
     <div class="w-50 flex-1">
         <h3 class="mb-4">My tasks</h3>
         <form method="GET" action="{{ route('tasks.index') }}" class="mb-3 d-flex gap-2">
@@ -193,7 +193,7 @@
     </div>
     @endif
 
-    @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('provider'))
+    @if(Auth::user()->hasRole('provider'))
     <div class="w-50 flex-1">
         <h3 class="mb-4 ">Available tasks</h3>
         <form method="GET" action="{{ route('tasks.index') }}" class="mb-3 d-flex gap-2">

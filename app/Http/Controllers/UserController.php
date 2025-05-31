@@ -88,6 +88,33 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('dashboard')->with('success', 'Credits withdrawn successfully');
     }
+    public function edit(string $id){
+        $user = User::find($id);
+        return view('users.edit-user', compact('user'));
+    }
+    public function update(Request $request, string $id){
+        $user = User::find($id);
+        if($user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'username' => $request->username
 
+        ])){
+            return redirect()->route('admin')->with('success', 'User edited successfully');
+        }else{
+            return redirect()->route('admin')->with('danger', 'User couldn\'t be edited');
 
+        }
+    }
+    public function destroy(string $id){
+        $user = User::find($id);
+        if($user->delete()){
+                    return redirect()->route('admin')->with('success', 'User deleted successfully');
+        }else{
+            return redirect()->route('admin')->with('danger', 'User couldn\'t be deleted');
+    }
+
+    }
 }

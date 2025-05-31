@@ -125,9 +125,9 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
         if($task->delete())
-            return redirect()->route('tasks.index')->with('success', 'Task deleted successfully');
+            return redirect()->back()->with('success', 'Task deleted successfully');
         else
-            return redirect()->route('tasks.index')->with('error', 'Task deletion failed');
+            return redirect()->back()->with('error', 'Task deletion failed');
     }
 
     public function accept(string $id)

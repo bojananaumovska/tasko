@@ -50,12 +50,10 @@
         </div>
 
         <div class="modal-body">
-          {{-- Hidden IDs --}}
           <input type="hidden" name="rater_user_id" id="rater_user_id2" value="{{ auth()->id() }}">
           <input type="hidden" name="rated_user_id" id="rated_user_id2" value="">
           <input type="hidden" name="task_id" id="task_id2" value="">
 
-          {{-- Rating (1 to 5 stars or dropdown) --}}
           <div class="mb-3">
             <label for="rating" class="form-label">Оцена (1-5)</label>
             <select class="form-control" name="rating" id="rating" >
@@ -68,7 +66,6 @@
             </select>
           </div>
 
-          {{-- Comment --}}
           <div class="mb-3">
             <label for="comment" class="form-label">Коментар</label>
             <textarea class="form-control" name="comment" id="comment" rows="3" required></textarea>
@@ -108,6 +105,7 @@
                 <p class="ms-3">{{ auth()->user()->email }}</p>
                 <p class="ms-3">{{ auth()->user()->phone }}</p>
                 <p class="ms-3">{{ auth()->user()->address }}</p>
+                
                 <div class="m-3">
                     <p><b>My balance: </b>{{auth()->user()->balance}}</p>
                     @if(auth()->user()->hasRole('client'))
@@ -123,6 +121,7 @@
                 
             </div>
         </div>
+@if(!auth()->user()->hasRole('admin'))
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
             <div class="bg-gray-200 dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
@@ -160,7 +159,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("Активни обврски") }}
                     <div class="flex gap-4">
-                    @if(Auth::check() && (auth()->user()->hasRole('client') || auth()->user()->hasRole('admin')))
+                    @if(Auth::check() && (auth()->user()->hasRole('client') ))
                             <div class="w-50 flex-1">
                                 <h3 class="w-100 p-3">My Active Tasks</h3>
                                 @foreach ($activeTasks as $task)
@@ -182,7 +181,7 @@
                                 @endforeach
                             </div>
                             @endif
-                            @if(Auth::check() && (auth()->user()->hasRole('provider') || auth()->user()->hasRole('admin')))
+                            @if(Auth::check() && (auth()->user()->hasRole('provider') ))
                             <div class="w-50 flex-1">
                                 <h3 class="w-100 p-3">Tasks I've Accepted</h3>
                                 @foreach ($acceptedTasks as $task)
@@ -220,7 +219,7 @@
             <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class=" flex-1">
                         <h3 class="w-100 p-3">My older tasks</h3>
-                        @if(Auth::check() && (auth()->user()->hasRole('provider') || auth()->user()->hasRole('admin')))
+                        @if(Auth::check() && (auth()->user()->hasRole('provider') ))
                         @foreach ($completedTasksAsProvider as $task)
                             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
                                 <div class="p-6 text-gray-900 dark:text-gray-100 d-flex flex-row justify-between">
@@ -252,7 +251,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        @elseif(Auth::check() && (auth()->user()->hasRole('client') || auth()->user()->hasRole('admin')))
+                        @elseif(Auth::check() && (auth()->user()->hasRole('client')))
                         @foreach ($completedTasksAsClient as $task)
                             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
                                 <div class="p-6 text-gray-900 dark:text-gray-100 d-flex flex-row justify-between">
@@ -313,5 +312,5 @@
             </div>
         </div>
     </div>
-
+@endif
 </x-app-layout>

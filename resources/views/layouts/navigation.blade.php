@@ -36,40 +36,50 @@
                 </div>
                 @endguest
                 @auth
+                @if(!auth()->user()->hasRole('admin'))
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
                         {{ __('Обврски') }}
                     </x-nav-link>
                 </div>
+                @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @if(auth()->user()->hasRole('admin'))
+                    <x-nav-link :href="route('admin')" :active="request()->routeIs('dashboard')">
+                        {{ __('Админ панел') }}
+                    </x-nav-link>
+                    @else
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Мој профил') }}
                     </x-nav-link>
+                    @endif
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @if(!auth()->user()->hasRole('admin'))
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Notifications ({{ count($notifications??[]) }})
-                    </button>
-                <ul class="dropdown-menu">
-                    @if(count($notifications??[]) == 0)
-                    <li><a class="dropdown-item" href="#">No notifications for now</a></li>
-                    @endif
-                    @foreach ($notifications as $notification)
-                  <li><a class="dropdown-item" href="#">
-                    <div class="p-2 text-gray-900 dark:text-gray-100 d-flex justify-content-between gap-3 align-items-center" >
-                        <p>{{ $notification->message }}</p>
-                        <small>{{ $notification->created_at_human }}</small>
-                        <form action="{{ route('notifications.delete', $notification->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="text-secondary" type="submit">X</button>
-                        </form>
-                    </div>
-                        </a></li>
-                    @endforeach
-                </ul>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Notifications ({{ count($notifications??[]) }})
+                        </button>
+                    <ul class="dropdown-menu">
+                        @if(count($notifications??[]) == 0)
+                        <li><a class="dropdown-item" href="#">No notifications for now</a></li>
+                        @endif
+                        @foreach ($notifications as $notification)
+                      <li><a class="dropdown-item" href="#">
+                        <div class="p-2 text-gray-900 dark:text-gray-100 d-flex justify-content-between gap-3 align-items-center" >
+                            <p>{{ $notification->message }}</p>
+                            <small>{{ $notification->created_at_human }}</small>
+                            <form action="{{ route('notifications.delete', $notification->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-secondary" type="submit">X</button>
+                            </form>
+                        </div>
+                            </a></li>
+                        @endforeach
+                    </ul>
                 </div>
+                @endif
                 </div>
                 @endauth 
             </div>
