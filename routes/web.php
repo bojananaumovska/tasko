@@ -42,9 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/tasks/{id}/markDone', [TaskController::class, 'markDone'])->middleware([isWorker::class, isAssociatedWithTask::class])->name('tasks.markAsDone');//isWorker middleware
 
     Route::middleware([IsOwner::class])->group(function () {
-    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->middleware([IsOwner::class, isAdmin::class])->name('tasks.edit');
-    Route::put('/tasks/{id}', [TaskController::class, 'update'])->middleware([IsOwner::class, isAdmin::class])->name('tasks.update');
-    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->middleware([IsOwner::class, isAdmin::class])->name('tasks.destroy');
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->middleware([IsOwner::class])->name('tasks.edit');
+    Route::put('/tasks/{id}', [TaskController::class, 'update'])->middleware([IsOwner::class])->name('tasks.update');
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->middleware([IsOwner::class])->name('tasks.destroy');
     });
     Route::put('/tasks/{id}/accept', [TaskController::class, 'accept'])->middleware([IsNotOwner::class])->name('tasks.accept');
 

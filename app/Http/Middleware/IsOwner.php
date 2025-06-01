@@ -20,7 +20,7 @@ class IsOwner
         $taskId = $request->route('id'); 
         $task = Task::findOrFail($taskId);
 
-        if (Auth::id() !== $task->user_id) {
+        if (Auth::id() !== $task->user_id and Auth::user()->role->name !== 'admin') {
             abort(403, 'Unauthorized action.');
         }
 
