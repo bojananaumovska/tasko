@@ -32,22 +32,22 @@
 ##  Чекори за поставување на проектот локално
 
 ### 1. Клонирајте го репозиториумот
-```bash
+
 git clone https://github.com/korisnicko-ime/ime-na-proekt.git
 cd ime-na-proekt
 
-## 2. Инсталирајте ги PHP зависностите преку Composer
+### 2. Инсталирајте ги PHP зависностите преку Composer
 composer install
 
-## 3. Инсталирајте ги frontend зависностите (за assets)
+### 3. Инсталирајте ги frontend зависностите (за assets)
 npm install
 npm run dev
 
-## 4. Креирате .env фајл од .env-example и генерирајте клуч
+### 4. Креирате .env фајл од .env-example и генерирајте клуч
 cp .env.example .env
 php artisan key:generate
 
-## 5. Мигрирајте ја базата и внесете примерни податоци (optional)
+### 5. Мигрирајте ја базата и внесете примерни податоци (optional)
 Во .env поставете ги следните параметри според вашата локална база
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -57,7 +57,7 @@ DB_USERNAME=root
 DB_PASSWORD=lozinka
 php artisan migrate --seed
 
-## 6. Стартувајте го девелопмент серверот
+### 6. Стартувајте го девелопмент серверот
 php artisan serve
  Апликацијата ќе биде достапна на:
  http://127.0.0.1:8000
